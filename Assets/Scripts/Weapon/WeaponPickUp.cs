@@ -11,10 +11,12 @@ public class WeaponPickUp : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (player != null && !player.HasWeapon)
         {
+            Destroy(player.GetComponentInChildren<Weapon>());
             player.EquipWeapon(weaponToGive); // Sahnedeki pickup objesinin verdiği silah
             Destroy(gameObject);
         }

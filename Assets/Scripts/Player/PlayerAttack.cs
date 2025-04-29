@@ -8,11 +8,12 @@ public class PlayerAttack : MonoBehaviour
     Player player;
         private void Start()
         {
-            player = gameObject.GetComponent<Player>();
-        }
+            player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
     private void Update()
     {
         currentWeapon = transform.GetComponentInChildren<Weapon>();
+        player.currentWeapon = this.currentWeapon;
         if (Input.GetKey(KeyCode.Space)||Input.GetKey(KeyCode.Mouse0))
         {
             currentWeapon.Attack();

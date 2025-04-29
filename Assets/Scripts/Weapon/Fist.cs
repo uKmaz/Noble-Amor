@@ -7,14 +7,12 @@ public class Fist : Weapon
 
     private int attackRange;
     Player player;
-    private void Awake()
-    {
-        damage = weaponData.fistDamage;
-    }
+    
 
     private void Start()
     { 
-        player = GetComponent<Player>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        damage = weaponData.fistDamage;
     }
 
     private void Update()
@@ -24,8 +22,12 @@ public class Fist : Weapon
 
     public override void Attack()
     {
-        Debug.Log("Punching with fist! Damage: " + damage);
-        player.attacking = false;
+        if (!player.HasWeapon)
+        {
+            Debug.Log("Punching with fist! Damage: " + damage);
+            player.attacking = false;
+        }
+
     }
 
 

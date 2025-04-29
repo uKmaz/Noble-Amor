@@ -9,4 +9,7 @@ public class WeaponData : ScriptableObject
     public int fistDamage = 10;
     public float fistDelay = 0.5f;
 
+    public int knifeDamage = 20;
+    public float knifeDelay = 0.2f;
+
 }
