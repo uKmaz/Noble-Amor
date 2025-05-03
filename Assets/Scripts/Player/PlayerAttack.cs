@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    public Weapon currentWeapon;
     Player player;
         private void Start()
         {
@@ -12,11 +11,11 @@ public class PlayerAttack : MonoBehaviour
     }
     private void Update()
     {
-        currentWeapon = transform.GetComponentInChildren<Weapon>();
-        player.currentWeapon = this.currentWeapon;
-        if (Input.GetKey(KeyCode.Space)||Input.GetKey(KeyCode.Mouse0))
+        player.currentWeapon = transform.GetComponentInChildren<Weapon>();
+        if ((Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Mouse0)) && player.currentWeapon != null) 
         {
-            currentWeapon.Attack();
+            Vector2 attackDirection = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - player.transform.position).normalized;
+            player.currentWeapon.Attack(attackDirection);
             player.attacking = true;
         }
     }

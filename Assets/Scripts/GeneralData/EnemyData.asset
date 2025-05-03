@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba52c37a16cb3f5448a48e849196ad94, type: 3}
-  m_Name: Weapon Data
+  m_Script: {fileID: 11500000, guid: 5145e161ce9a3684dba6780ad7d27aa8, type: 3}
+  m_Name: EnemyData
   m_EditorClassIdentifier: 
-  fistDamage: 10
-  fistDelay: 0.5
-  fist_AttackRange: 3
-  fist_Cooldown: 1.5
-  knifeDamage: 20
-  knifeDelay: 0.2
+  fist_moveSpeed: 3
+  fist_attackDamage: 10
+  fist_attackRange: 3.45
+  fist_cooldownTimer: 1.5
+  fist_maxHealth: 100

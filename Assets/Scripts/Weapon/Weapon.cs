@@ -5,22 +5,18 @@ using UnityEngine;
 public abstract class Weapon : MonoBehaviour
 {
     public WeaponData weaponData;
+    protected float cooldownTime;
+    protected float lastAttackTime = -999f;
     protected static int damage;
-    Player player;
     public int Damage { get { return damage; } }
+    public abstract void Attack(Vector2 direction);
 
-    public abstract void Attack();
-    private void Start()
+    protected bool CanAttack()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        return Time.time >= lastAttackTime + cooldownTime;
     }
-    private void Update()
+    protected void ResetAttackCooldown()
     {
-
-            if (Input.GetKey(KeyCode.Q))
-            {
-                player.ThrowWeapon();
-            }
-        
+        lastAttackTime = Time.time;
     }
 }

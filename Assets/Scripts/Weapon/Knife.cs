@@ -11,16 +11,12 @@ public class Knife : Weapon
 
     private void Start()
     {
-        player = FindAnyObjectByType<Player>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         damage = weaponData.knifeDamage;
     }
 
-    private void Update()
-    {
 
-    }
-
-    public override void Attack()
+    public override void Attack(Vector2 direction)
     {
         Debug.Log("Punching with knife! Damage: " + damage);
         player.attacking = false;

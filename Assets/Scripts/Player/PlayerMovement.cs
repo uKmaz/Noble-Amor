@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private Rigidbody2D rb;
-    [SerializeField] private movementData md;
+    [SerializeField] private PlayerData pd;
 
     public bool moving = false;
     
-    private void Start()
-    {
-        rb=GetComponent<Rigidbody2D>();
-    }
+
     private void Update()
     {
         if (moving)
@@ -30,19 +26,19 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W))
         {
-            transform.Translate(Vector3.up * md.moveSpeed * Time.deltaTime, Space.World);
+            transform.Translate(Vector3.up * pd.moveSpeed * Time.deltaTime, Space.World);
         }
         if (Input.GetKey(KeyCode.S))
         {
-            transform.Translate(Vector3.down * md.moveSpeed * Time.deltaTime, Space.World);
+            transform.Translate(Vector3.down * pd.moveSpeed * Time.deltaTime, Space.World);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            transform.Translate(Vector3.right * md.moveSpeed * Time.deltaTime, Space.World);
+            transform.Translate(Vector3.right * pd.moveSpeed * Time.deltaTime, Space.World);
         }
         if (Input.GetKey(KeyCode.A))
         {
-            transform.Translate(Vector3.left * md.moveSpeed * Time.deltaTime, Space.World);
+            transform.Translate(Vector3.left * pd.moveSpeed * Time.deltaTime, Space.World);
         }
 
     }
