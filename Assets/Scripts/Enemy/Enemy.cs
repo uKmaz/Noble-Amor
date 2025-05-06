@@ -1,34 +1,56 @@
 ﻿using UnityEngine;
 
-public abstract class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
-    [SerializeField] public EnemyData enemyData;
-    private Weapon currentWeapon;
-    protected int currentHealth;
+    public GameObject weaponObject; // Prefab’a el ile atanacak
 
-    protected virtual void Start()
+    private float damage, speed, range, cooldown, health, currentHealth;
+
+    void Start()
     {
-        currentWeapon = GetComponentInChildren<Weapon>();
-        currentWeapon.GetComponent<Rigidbody2D>().isKinematic = true;
-        currentHealth = enemyData.fist_maxHealth;
-    }
-
-    public virtual void TakeDamage(int amount)
-    {
-        currentHealth -= amount;
-        Debug.Log($"{gameObject.name} took {amount} damage. Remaining HP: {currentHealth}");
-
-        if (currentHealth <= 0)
+        Weapon weapon = weaponObject.GetComponent<Weapon>();
+        if (weapon == null)
         {
-            Die();
+            Debug.LogError("No Weapon component found on weapon object!");
+            return;
         }
+
+        WeaponType type = weapon.WeaponType;
+
+        WeaponData data = WeaponDatabase.Instance.GetDataByType(type);
+        if (data == null)
+        {
+            Debug.LogError("No WeaponData found for type: " + type);
+            return;
+        }
+
+        damage = data.damage;
+        speed = data.speed;
+        range = data.range;
+        cooldown = data.cooldown;
+        health = data.health;
+        currentHealth = health;
     }
 
-    protected virtual void Die()
-    {
-        Debug.Log($"{gameObject.name} died.");
-        Destroy(gameObject);
-    }
 
-    public abstract void Move(); // her düşman kendine göre override edecek
+
+        public virtual void TakeDamage(float amount)
+        {
+            currentHealth -= amount;
+
+            if (currentHealth <= 0)
+            {
+                Die();
+            }
+        }
+
+        protected virtual void Die()
+        {
+            Destroy(gameObject);
+        }
+
+        public void Attack()
+        {
+            Debug.Log($"{gameObject.name} attacks for {damage} damage!");
+        }
 }
