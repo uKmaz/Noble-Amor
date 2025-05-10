@@ -11,11 +11,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (moving)
-        {
-            movement();
-        }
-        movementCheck();
+        movement();
     }
 
     public void setMoving(bool value)
@@ -24,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void movement() {
 
+        movementCheck();
         if (Input.GetKey(KeyCode.W))
         {
             transform.Translate(Vector3.up * pd.moveSpeed * Time.deltaTime, Space.World);
@@ -44,11 +41,10 @@ public class PlayerMovement : MonoBehaviour
     }
     private void movementCheck()
     {
-        if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
-        {
-            moving = false;
-        }
-        else
-            moving = true;
+        moving =
+          Input.GetKey(KeyCode.W) ||
+          Input.GetKey(KeyCode.S) ||
+          Input.GetKey(KeyCode.A) ||
+          Input.GetKey(KeyCode.D);
     }
 }

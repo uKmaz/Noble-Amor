@@ -10,6 +10,7 @@ public class Knife : Weapon
     {
         base.Start();
         attackRange = weaponData.range;
+        attackerTransform = transform.root;
     }
 
     public override void Attack(Vector2 direction)
